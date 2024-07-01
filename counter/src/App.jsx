@@ -1,35 +1,39 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const [count, setCount] = useState(0);
+  return <Box variant='outlined' style={{display:'flex',justifyContent:'center',alignItems:'center',height:'100vh'}}>
+    <Card style={{display:'flex',justifyContent:'space-evenly',border:'2px solid grey',width:'300px',height:'300px',alignItems:"center"}}>
+      <Increase count={count} setCount={setCount}></Increase>
+      <Count count={count} setCount={setCount}></Count>
+      <Decrease count={count} setCount={setCount}></Decrease>
+    </Card>
+  </Box>
 }
 
+function Increase({count,setCount}){
+ return <Button variant='contained'style={{height:'40px'}} onClick={()=>{
+    setCount(count+1)
+  }}>Increase</Button>
+}
+function Decrease({count,setCount}){
+  return <Button variant='contained'style={{height:'40px'}} onClick={()=>{
+    setCount(count-1)
+  }}>Decrease</Button>
+}
+function Count({count,setCount}){
+  return <h1>{count}</h1>
+}
 export default App
